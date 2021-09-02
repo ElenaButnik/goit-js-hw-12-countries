@@ -1,1 +1,0 @@
-{"version":3,"sources":["sass/main.scss"],"names":[],"mappings":"AAAA,KACI,sBAGJ,iBAGE,QAAA,CACA,UAGF,KACI","file":"main.0da96378.css","sourceRoot":"../src","sourcesContent":["html {\n    box-sizing: border-box;\n  }\n\n*,\n*::after,\n*::before {\n  margin: 0;\n  padding: 0;\n}\n\nbody {\n    background-color: rgb(114, 24, 42);\n}"]}
