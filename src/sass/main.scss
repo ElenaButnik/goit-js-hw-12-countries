@@ -11,8 +11,13 @@ html {
 
 body {
     font-family: 'Shadows Into Light', cursive;
-    background-color: rgb(212, 230, 112);
+    background-image: linear-gradient( to right, rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4) ), 
+    url(../images/1616440083_1-p-karta-mira-fon.jpg);
+    background-size: cover;
+    
     font-size: 30px;
+    font-weight: 600;
+
 }
 
 .container {
@@ -21,6 +26,7 @@ body {
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
+  color: rgb(245, 235, 235);
  
 }
 
@@ -40,11 +46,14 @@ body {
 }
 
 input {
-  width: 400px;
+  width: 500px;
   border-radius: 5px;
+  color: rgb(43, 7, 7);
+  font-weight: 600;
 }
 
 .country__list {
   padding-left: 40px;
  list-style: square;
+ 
 }
