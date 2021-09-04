@@ -11,7 +11,7 @@ html {
 
 body {
     font-family: 'Shadows Into Light', cursive;
-    background-color: rgb(194, 224, 19);
+    background-color: rgb(212, 230, 112);
     font-size: 30px;
 }
 
@@ -21,7 +21,7 @@ body {
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
-  font-weight: 600;
+ 
 }
 
 .form {
@@ -42,4 +42,9 @@ body {
 input {
   width: 400px;
   border-radius: 5px;
+}
+
+.country__list {
+  padding-left: 40px;
+ list-style: square;
 }

@@ -1,25 +1,21 @@
 import './sass/main.scss';
 import countryCard from './templates/country-card.hbs';
-
+import countryList from './templates/country-list.hbs';
+import { debounce } from 'lodash';
+import { alert, error } from '../node_modules/@pnotify/core/dist/PNotify.js';
+  
 
 const refs = {
     countryContainer: document.querySelector('.js-card-container'),
     searchForm: document.querySelector('.js-input-form'),
 };
 
-refs.searchForm.addEventListener('input', onSearchInput);
-//let SearchQuery = " ";
-
+refs.searchForm.addEventListener('input', debounce(onSearchInput, 500) );
 
 function onSearchInput (e) {
-    //e.preventDefault();
+  refs.countryContainer.innerHTML = ' ';
 
-    //const form = e.currentTarget;
-   // console.log(form.elements);
-  // let SearchQuery = form.elements.query.value;
-  // const input = e.currentTarget;
- 
- let  SearchQuery = refs.searchForm.value;
+ let SearchQuery = refs.searchForm.value;
 
 fetchCountries(SearchQuery)
 .then(renderCountries)
@@ -29,15 +25,34 @@ fetchCountries(SearchQuery)
 function fetchCountries(name) {
  return  fetch(`https://restcountries.eu/rest/v2/name/${name}`)
 
-.then(response => {
-    return response.json();
-} 
-);
+.then(response =>  response.json());
+}
+
+function listMarkup (country) {
+    const listMarkup = countryList(country);
+    refs.countryContainer.innerHTML = listMarkup;
+}
+
+function markup (country) {
+   const markup = countryCard(country);
+   refs.countryContainer.innerHTML = markup;   
 }
 
 function renderCountries(country) {
-    const markup = countryCard(country);
-    refs.countryContainer.innerHTML = markup;
+    
+    if(country.length > 10) {
+      return error({
+        text: 'Too many matches found. Please enter a more specific query!'
+    }) 
+    }
+
+    if(country.length >= 2 && country.length <= 10){
+      return listMarkup(country);  
+    }
+
+    if(country.length === 1) {
+        return markup(country)
+    }    
 }
 
 
