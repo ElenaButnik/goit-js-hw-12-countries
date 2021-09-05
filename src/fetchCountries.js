@@ -10,7 +10,18 @@ const refs = {
     searchForm: document.querySelector('.js-input-form'),
 };
 
-refs.searchForm.addEventListener('input', debounce(onSearchInput, 500) );
+refs.searchForm.addEventListener('input', debounce(onSearchInput, 500));
+refs.searchForm.addEventListener('keyup', onErrorSearch);
+
+function onErrorSearch () {
+  this.value = this.value.replace(((/[\d]/g) && (/[^a-zA-Z\s]+$/)),'');
+}
+
+if (onErrorSearch) {
+  alert ({
+    text: 'Please enter your search in English!'
+}) 
+}
 
 function onSearchInput (e) {
   refs.countryContainer.innerHTML = ' ';
@@ -54,5 +65,3 @@ function renderCountries(country) {
         return markup(country)
     }    
 }
-
-
