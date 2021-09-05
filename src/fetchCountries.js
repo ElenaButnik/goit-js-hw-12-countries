@@ -11,17 +11,17 @@ const refs = {
 };
 
 refs.searchForm.addEventListener('input', debounce(onSearchInput, 500));
-refs.searchForm.addEventListener('keyup', onErrorSearch);
+refs.searchForm.addEventListener('keyup', debounce(onErrorSearch, 300));
 
 function onErrorSearch () {
   this.value = this.value.replace(((/[\d]/g) && (/[^a-zA-Z\s]+$/)),'');
 }
 
-if (onErrorSearch) {
-  alert ({
-    text: 'Please enter your search in English!'
-}) 
-}
+// if (onErrorSearch) {
+//   alert ({
+//     text: 'Please enter your search in English!'
+// }) 
+// }
 
 function onSearchInput (e) {
   refs.countryContainer.innerHTML = ' ';
@@ -36,7 +36,14 @@ fetchCountries(SearchQuery)
 function fetchCountries(name) {
  return  fetch(`https://restcountries.eu/rest/v2/name/${name}`)
 
-.then(response =>  response.json());
+.then(response => {
+if(response.ok) {
+ return response.json()
+}
+alert ({
+  text: 'Please enter your search in English!'
+}) 
+}  );
 }
 
 function listMarkup (country) {
